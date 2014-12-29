@@ -15,7 +15,7 @@ LIB_DIRS   =
 
 INC_DIRS   = 
 
-CC        ?= gcc
+CC        ?= $(CROSS_COMPILE)gcc
 CFLAGS    += $(INC_DIRS) -Wall
 
 LD         = $(CC)
@@ -43,8 +43,8 @@ clean:
 	rm -f $(OBJS) $(TARGET)
 
 install: $(TARGET)
-	install -D -g root -o root $(TARGET) $(TARGET_DIR)/sbin/$(TARGET)
-	install -D -g root -o root $(TARGET).1 $(TARGET_DIR)/share/man/man1/$(TARGET).1
+	install -D $(TARGET) $(TARGETDIR)/sbin/$(TARGET)
+	install -D $(TARGET).1 $(TARGETDIR)/share/man/man1/$(TARGET).1
 
 hd-idle.o:     hd-idle.c
 

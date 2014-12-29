@@ -168,6 +168,7 @@ int main(int argc, char *argv[])
   int min_idle_time;
   int sleep_time;
   int opt;
+  char command[128];    /* Foxconn added pling 04/17/2014 */
 
   /* create default idle-time parameter entry */
   if ((it = malloc(sizeof(*it))) == NULL) {
@@ -307,6 +308,11 @@ int main(int argc, char *argv[])
               spindown_disk(ds->name);
               ds->spindown = now;
               ds->spun_down = 1;
+              /* Foxconn added start pling 04/17/2014 */
+              /* Add hdparm command to better hdd compatibility */
+              sprintf(command, "hdparm -y /dev/%s", ds->name);
+              system(command);
+              /* Foxconn added end pling 04/17/2014 */
             }
           }
 
